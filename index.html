@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔹 Crypto Guardian – All-in-One Checker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 720px;
+            margin-top: 60px;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        h1, h2 {
+            font-weight: bold;
+        }
+
+        input.form-control {
+            background-color: #1c1c1c;
+            color: white;
+            border: 1px solid #444;
+        }
+
+        .btn-warning, .btn-success, .btn-info {
+            width: 100%;
+        }
+
+        .section-divider {
+            border-top: 2px dashed #777;
+            margin: 40px 0 30px 0;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .success {
+            background-color: #1e5623;
+        }
+
+        .warning {
+            background-color: #5a4200;
+        }
+
+        .error {
+            background-color: #5b1a1a;
+        }
+
+        ul.token-info {
+            text-align: left;
+            font-size: 14px;
+            background-color: #000000;
+            padding: 15px;
+            border-radius: 10px;
+            list-style: none;
+        }
+
+        ul.token-info li {
+            margin-bottom: 8px;
+        }
+
+        /* Education Tips Styling */
+        .education-tips {
+            background-color: #101820;
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px solid #3cff9a;
+            text-align: left;
+        }
+
+        .education-tips h2 {
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 700;
+            color: #3cff9a;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .education-tips ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #ffffff;
+        }
+
+        .education-tips ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>🔹 Crypto Guardian</h1>
+        <p class="mb-4">Check if a crypto token, URL, or wallet is scammy or safe!</p>
+
+        <!-- Scam Token Checker -->
+        <h2 class="mb-3">🔎 Scam Token Checker</h2>
+        <form method="POST" action="/">
+            <input type="text" name="token" class="form-control mb-3" placeholder="Enter Token Contract Address" required>
+            <button type="submit" class="btn btn-warning">Check Token</button>
+        </form>
+
+        {% if result %}
+            <div class="result-box 
+                {% if '✅' in result.message %}
+                    success
+                {% elif '⚠️' in result.message %}
+                    warning
+                {% else %}
+                    error
+                {% endif %}">
+                <h5>{{ result.message|safe }}</h5>
+
+                {% if result.info %}
+                    <ul class="token-info mt-3">
+                        <li><strong>Token Name:</strong> {{ result.info.ContractName or 'N/A' }}</li>
+                        <li><strong>Compiler Version:</strong> {{ result.info.CompilerVersion or 'N/A' }}</li>
+                        <li><strong>Contract Address:</strong> {{ result.info.ContractAddress or 'N/A' }}</li>
+                        <li><strong>Creator:</strong> {{ result.info.ContractCreator or 'N/A' }}</li>
+                        <li><strong>Creation Txn:</strong> {{ result.info.TxHash or 'N/A' }}</li>
+                        <li><strong>License:</strong> {{ result.info.LicenseType or 'N/A' }}</li>
+                    </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="section-divider"></div>
+
+        <!-- Phishing URL Checker -->
+        <h2 class="mb-3">🌐 Phishing URL Checker</h2>
+        <form method="POST" action="/">
+            <input type="text" name="phish_url" class="form-control mb-3" placeholder="Enter a suspicious URL" required>
+            <button type="submit" class="btn btn-success">Check URL</button>
+        </form>
+
+        {% if url_result %}
+            <div class="result-box 
+                {% if '✅' in url_result.message %}
+                    success
+                {% elif '⚠️' in url_result.message %}
+                    warning
+                {% else %}
+                    error
+                {% endif %}">
+                <h5>{{ url_result.message }}</h5>
+            </div>
+        {% endif %}
+
+        <div class="section-divider"></div>
+
+        <!-- Wallet Audit Checker -->
+        <h2 class="mb-3">💳 Wallet Safety Audit</h2>
+        <form method="POST" action="/">
+            <input type="text" name="wallet_address" class="form-control mb-3" placeholder="Enter Ethereum Wallet Address" required>
+            <button type="submit" class="btn btn-info">Audit Wallet</button>
+        </form>
+
+        {% if wallet_result %}
+            <div class="result-box 
+                {% if '✅' in wallet_result.message %}
+                    success
+                {% elif '⚠️' in wallet_result.message %}
+                    warning
+                {% else %}
+                    error
+                {% endif %}">
+                <h5>{{ wallet_result.message }}</h5>
+            </div>
+        {% endif %}
+
+        <div class="section-divider"></div>
+
+        <!-- 🧠 Education Center -->
+        <div class="education-tips mt-4">
+            <h2>🧠 Crypto Safety Tips</h2>
+            <ul>
+                <li>🔒 <strong>Verify Token Contracts:</strong> Check Etherscan for contract verification before investing.</li>
+                <li>⚠️ <strong>Avoid Suspicious Links:</strong> Never click unknown airdrop or wallet connection links.</li>
+                <li>🧊 <strong>Use Hardware Wallets:</strong> Store large holdings in cold wallets like Ledger or Trezor.</li>
+                <li>🕵️ <strong>Audit Wallet Activity:</strong> Review wallet interactions regularly for suspicious activity.</li>
+                <li>🔍 <strong>Double-Check URLs:</strong> Scam websites mimic real ones—scan links or type them yourself.</li>
+                <li>🧹 <strong>Revoke Risky Approvals:</strong> Use revoke.cash to remove unused token permissions.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
