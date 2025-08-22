@@ -22,8 +22,11 @@ This project was developed during the Bybit Hackathon at Karachi University (Aug
 
 
 ## Set up Python environment:
-python -m venv v
+python -m venv 
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+
+## Install dependencies:
 pip install -r requirements.txt
 
 
@@ -32,5 +35,5 @@ python app.py
 Open your browser and go to http://127.0.0.1:5000 to try the app.
 
 
-
+## Demo Screenshot
 [Screenshot of CryptoGuardian app] https://github.com/Zainab88804/Crypto-Guardian/blob/main/image.png
