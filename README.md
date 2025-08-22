@@ -30,3 +30,7 @@ pip install -r requirements.txt
 ## Run the application:
 python app.py
 Open your browser and go to http://127.0.0.1:5000 to try the app.
+
+
+
+[Screenshot of CryptoGuardian app] https://github.com/Zainab88804/Crypto-Guardian/blob/main/image.png
