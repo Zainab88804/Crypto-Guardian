@@ -13,3 +13,20 @@ This project was developed during the Bybit Hackathon at Karachi University (Aug
 - Scam token identification using blockchain analysis
 
 
+## How to Run
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/Zainab88804/Crypto-Guardian.git
+   cd Crypto-Guardian
+
+
+## Set up Python environment:
+python -m venv v
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+
+## Run the application:
+python app.py
+Open your browser and go to http://127.0.0.1:5000 to try the app.
